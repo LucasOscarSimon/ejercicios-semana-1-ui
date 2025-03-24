@@ -37,10 +37,12 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15" // Asegúrate de que esta versión sea compatible con tu versión de Kotlin
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -49,8 +51,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
     implementation(libs.androidx.ui.text)
+    implementation(libs.material.icons.extended) // Uso del catálogo de versiones para material-icons-extended
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
