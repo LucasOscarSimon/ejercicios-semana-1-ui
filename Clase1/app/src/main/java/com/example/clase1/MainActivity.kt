@@ -5,22 +5,21 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Print
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.foundation.text.KeyboardOptions
-
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.text.KeyboardOptions
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,15 +43,23 @@ fun Example() {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        // Título
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = "Ejercicio 1",
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF6200EE), // Violeta Material
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
 
+        // Campo de texto y botón
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
                 value = entryText,
                 onValueChange = { newText ->
-                    // Solo permitir caracteres numéricos
                     if (newText.all { it.isDigit() }) {
                         entryText = newText
                     }
@@ -64,29 +71,32 @@ fun Example() {
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            Text(
-                text = nameButton,
-                color = Color.Magenta,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+            Button(
+                onClick = { resultText = entryText },
                 modifier = Modifier
-                    .clickable {
-                        resultText = entryText
-                    }
-                    .padding(8.dp)
-            )
+                    .height(56.dp)
+                    .align(Alignment.CenterVertically)
+            ) {
+                Icon(Icons.Filled.Print, contentDescription = "Imprimir")
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = nameButton,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Caja decorativa para mostrar el resultado
+        // Resultado
         if (resultText.isNotEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .background(Color(0xFFE0E0E0)) // gris claro
+                    .background(Color(0xFFE0E0E0))
                     .padding(16.dp)
             ) {
                 Text(
